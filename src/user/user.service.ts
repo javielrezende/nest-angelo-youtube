@@ -1,7 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { Repository } from 'typeorm';
+import { CreateUserInput } from './dto/create-user.input';
 
 @Injectable()
 export class UserService {
@@ -21,5 +22,16 @@ export class UserService {
             throw new NotFoundException('User not found');
         }    
         return user;
+    }
+
+    async create(data: CreateUserInput): Promise<User> {
+        const user = this.userRepository.create(data);
+        const userSaved = await this.userRepository.save(user);
+        
+        if(!userSaved) {
+            throw new InternalServerErrorException('Problem to create a user. Try again');
+        }
+
+        return userSaved;
     }
 }
