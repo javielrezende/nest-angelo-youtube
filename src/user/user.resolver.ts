@@ -12,7 +12,7 @@ export class UserResolver {
 
     @Query(() => [User])
     async users(): Promise<User[]> {
-        const users = await this.userService.findAll();
+        const users = await this.userService.findAllUsers();
         return users;
     }
 
@@ -20,7 +20,7 @@ export class UserResolver {
     async user(
         @Args('id') id: string
     ): Promise<User> {
-        const user = this.userService.findById(id);
+        const user = this.userService.findUserById(id);
         return user;
     }
 
@@ -28,7 +28,7 @@ export class UserResolver {
     async createUser(
         @Args('data') data: CreateUserInput
     ): Promise<User> {
-        const user = await this.userService.create(data);
+        const user = await this.userService.createUser(data);
         return user;
     }
 

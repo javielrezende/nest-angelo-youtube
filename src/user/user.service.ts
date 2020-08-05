@@ -12,12 +12,12 @@ export class UserService {
         private userRepository: Repository<User>
     ) {}
 
-    async findAll(): Promise<User[]> {
+    async findAllUsers(): Promise<User[]> {
         const users = await this.userRepository.find();        
         return users;
     }
 
-    async findById(id: string): Promise<User> {
+    async findUserById(id: string): Promise<User> {
         const user = await this.userRepository.findOne(id);    
         if(!user) {
             throw new NotFoundException('User not found');
@@ -25,7 +25,7 @@ export class UserService {
         return user;
     }
 
-    async create(data: CreateUserInput): Promise<User> {
+    async createUser(data: CreateUserInput): Promise<User> {
         const user = this.userRepository.create(data);
         const userSaved = await this.userRepository.save(user);
         
@@ -37,7 +37,7 @@ export class UserService {
     }
 
     async updateUser(id: string, data: UpdateUserInput): Promise<User> {
-        const user = await this.findById(id);
+        const user = await this.findUserById(id);
 
         await this.userRepository.update(user, { ...data });
 
