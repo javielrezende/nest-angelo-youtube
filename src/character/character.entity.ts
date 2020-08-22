@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @ObjectType()
 @Entity()
-export class User {
+export class Character {
     @PrimaryGeneratedColumn()
     @Field(() => ID)
     id: string;
@@ -12,5 +12,19 @@ export class User {
     name: string;
 
     @Column()
-    email: string;
+    level: number;
+
+    @Column()
+    description: string;
+
+
+    @Column()
+    strength: number;
+
+    @Column()
+    intelligence: number;
+
+    @Column()
+    agility: number;
+
 }

@@ -3,14 +3,15 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @ObjectType()
 @Entity()
-export class User {
+export class CharacterClass {
     @PrimaryGeneratedColumn()
-    @Field(() => ID)
+    @Filed(() => ID)
     id: string;
 
     @Column()
     name: string;
 
     @Column()
-    email: string;
+    description: string;
+    
 }
