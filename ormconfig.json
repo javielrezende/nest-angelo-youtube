@@ -1,10 +1,12 @@
 {
-    "type": "postgres",
+    "type": "mysql",
     "host": "localhost",
-    "port": 5432,
-    "username": "javielrezende",
-    "password": "",
+    "port": 3306,
+    "username": "eduardo",
+    "password": "32712167",
     "database": "angeloyt",
-    "entities": ["dist/**/*.entity{.ts,.js}"],
+    "entities": [
+        "dist/**/*.entity{.ts,.js}"
+    ],
     "synchronize": true
-}
+}e
