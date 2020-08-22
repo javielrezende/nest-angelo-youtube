@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, InternalServerErrorException} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Character } from './user.entity';
 import { Repository } from 'typeorm';
@@ -18,5 +18,34 @@ export class CharacterService {
             throw new NotFoundException("Sem usuários!")
         }
         return chars;
+    }
+
+    async findCharById(id: string):
+    Promise<Character>{
+        const char = await this.characterRepository.findOne(id);
+        if(!char){
+            throw new NotFoundException('Character not found!')
+        }
+        return char;
+    }
+
+    async createCharacter(data: CreateCharacterInput): Promise<Character>{
+        const char = this.characterRepository.create(data);
+        const charSaved = await this.characterRepository.save(char)
+
+        if(!userSaved) {
+            throw new InternalServerErrorException('Problem to create a character. try again please!')
+        }
+
+        return charSaved;
+    }
+
+    async updateCharacter(id: string, data: UpdateCharacterInput): Promise<Character>{
+        const char = await this.findCharById(id);
+        
+        await this.characterRepository.update(char, {...data});
+
+        const charUpdated = this.characterRepository.create({ ...user, ...data});
+        return charUpdated;
     }
 }

@@ -3,28 +3,15 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @ObjectType()
 @Entity()
-export class Character {
+export class CharacterClass {
     @PrimaryGeneratedColumn()
-    @Field(() => ID)
+    @Filed(() => ID)
     id: string;
 
     @Column()
     name: string;
 
     @Column()
-    level: number;
-
-    @Column()
     description: string;
-
-
-    @Column()
-    strength: number;
-
-    @Column()
-    intelligence: number;
-
-    @Column()
-    agility: number;
-
+    
 }
